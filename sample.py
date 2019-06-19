@@ -26,7 +26,7 @@ def detect(frame):
     out = net.forward()
 
     boxes = out[0,0,:,3:7] * np.array([300, 300, 300, 300])
-    classes = out[0,0,:1,1]
+    classes = out[0,0,:,1]
     confidences = out[0,0,:,2]
 
     for i, box in enumerate(boxes):
