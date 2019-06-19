@@ -41,7 +41,7 @@ def detect(frame):
         (startX, startY, endX, endY) = box.astype('int')
         cv2.rectangle(frame, (startX, startY), (endX, endY), (0,255,0),2)
 
-        label = '{}: {;.2f}%'.format('Person', confidence * 100)
+        label = '{}: {:.2f}%'.format('Person', confidence * 100)
         y = startY - 15 if startY - 15 > 15 else startY + 15
         cv2.putText(frame, label, (startX, y), cp2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255,0),1)
 
