@@ -2,11 +2,25 @@ from flask import Flask, Response, render_template
 from imutils.video.pivideostream import PiVideoStream
 import cv2
 import time
+import numpy as np
+
+net = cv2.dnn.readNetFromCaffe('/home/pi/models/MobileNetSSD_deploy.prototxt',
+        '/home/pi/models/MobileNetSSD_deploy.caffemodel')
 
 
 app = Flask(__name__)
 camera = PiVideoStream(resolution=(400, 304), framerate=10).start()
 time.sleep(2)
+
+
+def detect(frame):
+    frame = cv2.resize(frame, (300, 300))
+    blob = cv2.dnn.blobFromImage(
+        image=frame,
+        scalefactor=0.007843,
+        size=(300, 300),
+        mean=127.5
+    )
 
 
 def gen(camera):
